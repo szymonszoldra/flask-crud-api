@@ -10,9 +10,9 @@ load_dotenv()
 def hello_world():
     return '''/setup - initialize table students in database
 /create - add student in database
-/read - show particular student record
-/update - update particular student
-/delete - delete particular student
+/read/id - show the record of the particular student with the given ID
+/update/id - update particular student
+/delete/id - delete particular student
 '''
 
 
