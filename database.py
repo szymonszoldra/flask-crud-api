@@ -20,5 +20,17 @@ class Database:
         except sqlite3.Error as e:
             print(e)
 
+    def read(self, query, student_id):
+        try:
+            if type(int(student_id)) == str:
+                raise ValueError
+            query = self.cursor.execute(query, student_id)
+            self.connection.commit()
+            return query.fetchall()
+        except sqlite3.Error as e:
+            return {'error': str(e)}
+        except ValueError:
+            return {'error': 'ID must be an integer'}
+
     def __del__(self):
         self.connection.close()

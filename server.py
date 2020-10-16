@@ -1,7 +1,7 @@
 from database import Database
 from os import getenv
 from dotenv import load_dotenv
-from flask import Flask, request
+from flask import Flask, request, jsonify
 app = Flask(__name__)
 load_dotenv()
 
@@ -18,14 +18,14 @@ def hello_world():
 
 @app.route('/setup')
 def setup_database():
-    name = getenv('DB_NAME')
-    db = Database(name)
+    db_name = getenv('DB_NAME')
+    db = Database(db_name)
     db.initialize('CREATE TABLE students (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, surname TEXT, mark INTEGER)')
     return 'Initialized table students in database'
 
 
 @app.route('/create', methods=['POST'])
-def add_student():
+def create():
     req = request.get_json()
     db_name = getenv('DB_NAME')
     db = Database(db_name)
@@ -33,8 +33,16 @@ def add_student():
     surname = req['surname']
     mark = req['mark']
 
-    query = f'INSERT INTO students (id ,name, surname, mark) VALUES (?,?,?,?)'
+    query = 'INSERT INTO students (id ,name, surname, mark) VALUES (?,?,?,?)'
     db.create(query, name, surname, mark)
     return 'Insertion complete'
 
+
+@app.route('/read/<student_id>')
+def read(student_id):
+    db_name = getenv('DB_NAME')
+    db = Database(db_name)
+    query = 'SELECT name, surname, mark FROM students WHERE id=?'
+    student = db.read(query, student_id)
+    return jsonify(student)
 
