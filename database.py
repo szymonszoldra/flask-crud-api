@@ -22,7 +22,7 @@ class Database:
 
     def read(self, query, student_id):
         try:
-            if type(int(student_id)) == str:
+            if type(int(student_id[0])) == str:
                 raise ValueError
             query = self.cursor.execute(query, student_id)
             self.connection.commit()

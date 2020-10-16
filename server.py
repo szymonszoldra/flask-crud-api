@@ -43,6 +43,6 @@ def read(student_id):
     db_name = getenv('DB_NAME')
     db = Database(db_name)
     query = 'SELECT name, surname, mark FROM students WHERE id=?'
-    student = db.read(query, student_id)
+    student = db.read(query, (student_id,))
     return jsonify(student)
 
