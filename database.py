@@ -39,5 +39,16 @@ class Database:
         except sqlite3.Error as e:
             print(e)
 
+    def delete(self, query, student_id):
+        try:
+            if type(int(student_id[0])) == str:
+                raise ValueError
+            self.cursor.execute(query, student_id)
+            self.connection.commit()
+        except sqlite3.Error as e:
+            print(e)
+        except ValueError:
+            print('ID must be an integer')
+
     def __del__(self):
         self.connection.close()

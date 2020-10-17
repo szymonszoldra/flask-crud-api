@@ -56,3 +56,12 @@ def update(student_id):
     query = 'UPDATE students SET mark=? WHERE id=?'
     db.update(query, (new_mark, student_id))
     return 'Updated successfully'
+
+
+@app.route('/delete/<student_id>', methods=['DELETE'])
+def delete(student_id):
+    db_name = getenv('DB_NAME')
+    db = Database(db_name)
+    query = 'DELETE FROM students WHERE id=?'
+    db.delete(query, (student_id,))
+    return 'Deleted successfully'
