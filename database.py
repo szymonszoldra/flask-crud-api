@@ -32,5 +32,12 @@ class Database:
         except ValueError:
             return {'error': 'ID must be an integer'}
 
+    def update(self, query, student_info):
+        try:
+            self.cursor.execute(query, student_info)
+            self.connection.commit()
+        except sqlite3.Error as e:
+            print(e)
+
     def __del__(self):
         self.connection.close()

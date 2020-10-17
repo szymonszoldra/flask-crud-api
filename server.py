@@ -46,3 +46,13 @@ def read(student_id):
     student = db.read(query, (student_id,))
     return jsonify(student)
 
+
+@app.route('/update/<student_id>', methods=['PUT'])
+def update(student_id):
+    req = request.get_json()
+    db_name = getenv('DB_NAME')
+    db = Database(db_name)
+    new_mark = req['mark']
+    query = 'UPDATE students SET mark=? WHERE id=?'
+    db.update(query, (new_mark, student_id))
+    return 'Updated successfully'
