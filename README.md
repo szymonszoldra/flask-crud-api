@@ -51,12 +51,12 @@ Endpoints:
 Make GET request to /setup to initialize Database with the students table.
 
 ### Create
-Make POST request with JSON body like below to /create, where X is string and Y is integer.
+Make POST request with JSON body like below to /create, where X is string and Y is integer (without quotes).
 ```json
 {
   "name": "X",
   "surname": "X",
-  "mark": Y
+  "mark": "Y"
 }
 ```
 
