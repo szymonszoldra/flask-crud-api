@@ -23,7 +23,10 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+Make .env file with DB_NAME=name_of_your_db.sqlite3, just like in .env.example
+
 Then write in terminal:
+
 ```shell script
 export FLASK_APP=server.py
 export FLASK_ENV=development
