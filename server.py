@@ -9,7 +9,7 @@ load_dotenv()
 @app.route('/')
 def hello_world():
     return '''/setup - initialize table students in database
-/create - add student in database
+/create - add student to database
 /read/id - show the record of the particular student with the given ID
 /update/id - update particular student
 /delete/id - delete particular student
